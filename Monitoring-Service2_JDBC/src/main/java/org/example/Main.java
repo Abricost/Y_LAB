@@ -40,17 +40,6 @@ public class Main {
             System.out.println("SQL Exception in migration: " + e.getMessage());
         }
 
-//        UserRepository userRepository = new UserRepository(new DataSourceConfig());
-//        UserService userService = new UserService(userRepository);
-//        userService.createUser("user1", "123", Role.ROLE_USER);
-
-//        IndicatorsRepository indicatorsRepository = new IndicatorsRepository(new DataSourceConfig());
-//        indicatorsRepository.addNewIndicator("testInd");
-
-        // Public command: login; reg; exit;
-        // Users command: input; show; logout
-        // Admin command: show_users; role_admin; log; new_ind; show_user_ind
-
         List<String> publicCommands = new ArrayList<>(List.of("login", "reg", "exit"));
         List<String> userCommands = new ArrayList<>(List.of("input", "show", "logout"));
         List<String> adminCommands = new ArrayList<>(List.of("show_users", "role_admin", "log", "new_ind", "show_user_ind"));
@@ -66,7 +55,7 @@ public class Main {
             String command = scanner.nextLine();
             if (command.equals("exit")) break;
 
-            if (userCommands.contains(command) && userService.getActiveLogin() == null && !publicCommands.contains(command)) {
+            if (userCommands.contains(command) && UserService.activeLogin == null && !publicCommands.contains(command)) {
                 System.out.println("Требуется авторизация");
                 continue;
             }

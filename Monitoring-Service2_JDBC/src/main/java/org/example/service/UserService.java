@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class UserService {
 
-    private String activeLogin;
+    public static String activeLogin;
 
     private final UserRepository userRepository;
 
@@ -30,6 +30,10 @@ public class UserService {
         userRepository.createUser(user);
     }
 
+    public int getIdByLogin(String login) {
+        return userRepository.getIdByLogin(login);
+    }
+    
     public boolean isLoginExists(String login) {
         return userRepository.isLoginExists(login);
     }

@@ -31,8 +31,18 @@ public class UserRepository {
 
     }
 
-    public User getUserByLogin(String login) {
-        return null;
+    public Integer getIdByLogin(String login) {
+        String sql = "SELECT id FROM testschema.users WHERE login = ?";
+        try (Connection connection = dataSourceConfig.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt("id");
+        } catch (SQLException e) {
+            System.out.println("SQL check user (getIdByLogin) Exception: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isCorrectUser(String login, String password) {
